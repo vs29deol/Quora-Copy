@@ -1,0 +1,24 @@
+<%= form_for(@question) do |f| %>
+<p>
+  <%= f.text_area :name, placeholder: "Enter Question" %>
+</p>
+<p>
+  <%= f.label :select_topic %>
+  <%= f.collection_select :topic_id, Topic.all, :id, :name, include_blank: false%>
+</p>
+  <% if @question.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@question.errors.count, "error") %> prohibited this question from being saved:</h2>
+
+      <ul>
+      <% @question.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

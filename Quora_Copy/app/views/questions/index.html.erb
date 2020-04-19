@@ -1,0 +1,42 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Listing Questions</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <tr>
+      <th>Question</th>
+      <th>Topic</th>
+      <th>Author</th>
+      <th colspan="3">Actions</th>
+    </tr>
+    <% if @questions.count == 0 %>
+      <tr>
+        <td colspan="5">No Item Found</td>
+      </tr>
+    <% else %>
+      <% @questions.each do |question| %>
+        <tr>
+          <td><%= question.name %></td>
+          <td><%= question.topic.name %></td>
+          <td><%= question.user.email %></td>
+          <td><%= link_to 'Show', question %></td>
+          <td><%= link_to 'Edit', edit_question_path(question) %></td>
+          <td><%= link_to 'Destroy', question, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        </tr>
+      <% end %>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+<br>
+
+<%= link_to 'Add New Question', new_question_path %>
+<%= link_to 'Add New Topic', new_topic_path %>

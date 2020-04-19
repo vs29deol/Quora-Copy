@@ -1,0 +1,47 @@
+<p id="notice"><%= notice %></p>
+<h2>User: <%= @question.user.email %></h2>
+<%= form_for('question', :url => {action: 'follow'}) do |f| %>
+	<%= f.text_field :user_id, value: @question.user_id, hidden: true %>
+	<%= f.submit 'Follow User' %>
+<% end %>
+<h2>Topic: <%= @question.topic.name %></h2>
+<%= form_for('question', :url => {action: 'follow'}) do |f| %>
+	<%= f.text_field :topic_id, value: @question.topic_id, hidden: true %>
+	<%= f.submit 'Follow Topic' %>
+<% end %>
+Question: <%= @question.name %>
+<div>
+	Answers: 
+	<p>
+		<ol>
+			<% @answer.each do |ans| %>
+	          <li><%= ans.name %></li>
+	        <% end %>
+      	</ol>
+    </p>
+    <p>
+      <%= form_for(Answer.new) do |f| %>
+		<p>
+		  <%= f.text_field :question_id, hidden: true, value: @question.id %>
+		  <%= f.text_area :name, placeholder: "Enter Answer" %>
+		</p>
+		  <% if Answer.new.errors.any? %>
+		    <div id="error_explanation">
+		      <h2><%= pluralize(Answer.new.errors.count, "error") %> prohibited this question from being saved:</h2>
+
+		      <ul>
+		      <% Answer.new.errors.full_messages.each do |message| %>
+		        <li><%= message %></li>
+		      <% end %>
+		      </ul>
+		    </div>
+		  <% end %>
+
+		  <div class="actions">
+		    <%= f.submit %>
+		  </div>
+		<% end %>
+	</p>
+</div>
+<%= link_to 'Edit', edit_question_path(@question) %> |
+<%= link_to 'Back', questions_path %>

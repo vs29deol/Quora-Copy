@@ -1,0 +1,32 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Listing Topics</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @topics.each do |topic| %>
+      <tr>
+        <th>Name</th>
+        <th>Author</th>
+        <th colspan="2">Actions</th>
+      </tr>
+      <tr>
+        <td><%= topic.name %></td>
+        <td><%= topic.user.email %></td>
+        <td><%= link_to 'Edit', edit_topic_path(topic) %></td>
+        <td><%= link_to 'Destroy', topic, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'Add New Topic', new_topic_path %>
+<%= link_to 'List All Question', controller: 'questions', action: 'index' %>
